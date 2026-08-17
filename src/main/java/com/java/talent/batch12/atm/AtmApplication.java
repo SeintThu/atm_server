@@ -12,3 +12,4 @@ public class AtmApplication {
 	}
 
 }
+//App's menu , controller , service, db(repositroy), model, real db
