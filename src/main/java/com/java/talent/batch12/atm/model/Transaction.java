@@ -1,46 +1,27 @@
 package com.java.talent.batch12.atm.model;
 
 import com.java.talent.batch12.atm.model.enumType.TransactionType;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name ="transactions")
+@Data
 public class Transaction extends  AbstractEntity{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int transactionId;
 
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
+    @Column(name = "amount", nullable = false)
     private int amount;
 
+    @Column(name = "account_id", nullable = false)
     private String accountId;
 
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
 }
