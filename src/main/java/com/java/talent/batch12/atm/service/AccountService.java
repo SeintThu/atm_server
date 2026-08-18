@@ -13,13 +13,14 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
 
-    public Account createAccount(String userName, String password,String email){
+    public Account createAccount(String userName, String password,String email,String address){
 
         //validation
 
         Account account = new Account();
         account.setUsername(userName);
         account.setPassword(password);
+        account.setAddress(address);
         account.setEmail(email);
 
         return accountRepository.save(account);

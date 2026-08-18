@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>ATM Management System</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>ATM Management System</h1>
+    <hr>
+    <h2>Login Account</h2>
+
+    <div th:if="${loginError}" class="alert alert-danger" th:text="${loginError}"></div>
+
+    <form action="#" th:action="@{/loginAccount}" th:object="${loginInfo}"
+          method="POST">
+
+
+        <input type="text"
+               th:field="*{name}" placeholder="Account Email"
+               class="form-control mb-4 col-4" required>
+        <input type="password"
+               th:field="*{password}" placeholder="Account Password"
+               class="form-control mb-4 col-4" required>
+
+        <button type="submit" class="btn btn-info col-2">Login
+            </button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Back to Account List</a>
+</div>
+</body>
+</html>
