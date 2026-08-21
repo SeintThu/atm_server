@@ -21,7 +21,8 @@ public class Transaction extends  AbstractEntity{
     @Column(name = "amount", nullable = false)
     private int amount;
 
-    @Column(name = "account_id", nullable = false)
-    private String accountId;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "accounts")
@@ -25,6 +27,13 @@ public class Account extends AbstractEntity{
 
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+//    @OneToMany(mappedBy = "accounts")
+//    List<Transaction> transactions;
 
     @Override
     public String toString() {
