@@ -1,10 +1,16 @@
 package com.java.talent.batch12.atm.service;
 
 import com.java.talent.batch12.atm.model.Account;
+import com.java.talent.batch12.atm.model.Role;
 import com.java.talent.batch12.atm.repository.AccountRepository;
+import com.java.talent.batch12.atm.repository.RoleRespository;
 import com.java.talent.batch12.atm.repository.TransactionRepository;
+import com.java.talent.batch12.atm.request.RegisterInfo;
+import com.java.talent.batch12.atm.response.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +18,17 @@ import org.springframework.stereotype.Service;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+
+    private final RoleRespository roleRespository;
+
+    public ResponseEntity<?> handleCreateAccountRequest(
+            RegisterInfo registerInfo
+    ){
+        Account account = createAccount(registerInfo.getName(),registerInfo.getEmail(),registerInfo.getPassword(),registerInfo.getEmail());
+
+        return ResponseUtils.createCommonResponse(HttpStatus.OK,"create-account",
+                "create-account","post-method","Account is created",account);
+    }
 
     public Account createAccount(String userName, String password,String email,String address){
 
@@ -22,6 +39,14 @@ public class AccountService {
         account.setPassword(password);
         account.setAddress(address);
         account.setEmail(email);
+
+        Role userRole = new Role();
+        userRole.setRoleName("USER");
+
+         roleRespository.save(userRole);
+
+
+        account.setRole(userRole);
 
         return accountRepository.save(account);
     }

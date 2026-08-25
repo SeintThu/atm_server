@@ -23,7 +23,7 @@ public class AccountController {
     @ResponseBody
     @GetMapping("/accounts")
     public String helloWorld() {
-        return "Hello World!";
+        return "Hello World from Controller!";
     }
 
     @GetMapping("/")
