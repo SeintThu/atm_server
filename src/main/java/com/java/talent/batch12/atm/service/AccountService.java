@@ -4,13 +4,12 @@ import com.java.talent.batch12.atm.model.Account;
 import com.java.talent.batch12.atm.model.Role;
 import com.java.talent.batch12.atm.repository.AccountRepository;
 import com.java.talent.batch12.atm.repository.RoleRespository;
-import com.java.talent.batch12.atm.repository.TransactionRepository;
 import com.java.talent.batch12.atm.request.RegisterInfo;
 import com.java.talent.batch12.atm.response.ResponseUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +19,8 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     private final RoleRespository roleRespository;
+
+    private final PasswordEncoder passwordEncoder;
 
     public ResponseEntity<?> handleCreateAccountRequest(
             RegisterInfo registerInfo
@@ -36,7 +37,7 @@ public class AccountService {
 
         Account account = new Account();
         account.setUsername(userName);
-        account.setPassword(password);
+        account.setPassword(passwordEncoder.encode(password));
         account.setAddress(address);
         account.setEmail(email);
 
