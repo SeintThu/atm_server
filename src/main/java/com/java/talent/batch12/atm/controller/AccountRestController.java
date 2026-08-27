@@ -28,6 +28,15 @@ public class AccountRestController {
     private  final AccountService accountService;
 
 
+    @GetMapping()
+    public String greeting(
+    ) {
+
+        LOGGER.info("/api/accounts is reached");
+
+        return "Hello from My ATM app from port: " + port;
+    }
+
 
     @DeleteMapping()
     public String deleteAccount(

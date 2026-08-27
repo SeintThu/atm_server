@@ -6,6 +6,7 @@ import com.java.talent.batch12.atm.repository.AccountRepository;
 import com.java.talent.batch12.atm.repository.RoleRespository;
 import com.java.talent.batch12.atm.request.RegisterInfo;
 import com.java.talent.batch12.atm.response.ResponseUtils;
+import com.java.talent.batch12.atm.security.UserPrincipalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,12 @@ public class AccountService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final UserPrincipalService userPrincipalService;
+
     public ResponseEntity<?> handleCreateAccountRequest(
             RegisterInfo registerInfo
     ){
+        String accountId = userPrincipalService.getAccountIdByCurrentUser();
         Account account = createAccount(registerInfo.getName(),registerInfo.getEmail(),registerInfo.getPassword(),registerInfo.getEmail());
 
         return ResponseUtils.createCommonResponse(HttpStatus.OK,"create-account",

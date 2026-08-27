@@ -2,6 +2,7 @@ package com.java.talent.batch12.atm.controller;
 
 import com.java.talent.batch12.atm.request.RegisterInfo;
 import com.java.talent.batch12.atm.response.ResponseUtils;
+import com.java.talent.batch12.atm.security.JWTTokenService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,8 +20,7 @@ public class AuthController {
     @Value("${server.port}")
     private String port;
 
-    @Value("${jwt.apikey}")
-    private String serverApikey;
+    private final JWTTokenService jwtTokenService;
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
@@ -41,9 +41,7 @@ public class AuthController {
     ) {
 
         LOGGER.info("/api/accounts is reached");
-        if(!serverApikey.equals(apikey)){
-            return "Incorrect apikey";
-        }
+
         return "Hello from My ATM app from port: " + port;
     }
 
@@ -54,6 +52,9 @@ public class AuthController {
      */
     @GetMapping("/login")
     public String login() {
-        return "login";
+
+        return  jwtTokenService.generateAccessToken("Saung","09753444579","USER")
+               + ":/n :" + jwtTokenService.generateRefreshToken("Saung","09753444579","USER")
+         ;
     }
 }
