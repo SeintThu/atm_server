@@ -1,5 +1,7 @@
 package com.java.talent.batch12.atm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +20,7 @@ public class Account extends AbstractEntity{
 
     @Column(name = "username", nullable = false, length = 512)
     private String username;
+    @JsonIgnore
     @Column(name = "password", nullable = false, length = 512)
     private String password;
     @Column(name = "balance")

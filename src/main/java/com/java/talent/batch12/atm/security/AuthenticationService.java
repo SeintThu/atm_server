@@ -41,7 +41,8 @@ public class AuthenticationService {
     private static final List<String> EXCLUDED_URIS = List.of(
             "/api/auth/login",
             "/api/auth",
-            "/api/auth/signup"
+            "/api/auth/signup",
+            "/api/auth/refresh"
     );
 
 
