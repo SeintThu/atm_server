@@ -1,6 +1,5 @@
 package com.java.talent.batch12.atm;
 
-import com.java.talent.batch12.atm.model.Account;
 import com.java.talent.batch12.atm.service.AccountService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

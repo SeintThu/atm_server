@@ -36,12 +36,12 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         String[] segments = requestUri.split("/");
         String apiId = segments[segments.length - 1];
 
-//        if (requestUri.startsWith("/swagger-ui") ||
-//                requestUri.startsWith("/v3/api-docs") ||
-//                requestUri.equals("/swagger-ui.html")) {
-//            chain.doFilter(request, response);
-//            return;
-//        }
+        if (requestUri.startsWith("/swagger-ui") ||
+                requestUri.startsWith("/v3/api-docs") ||
+                requestUri.equals("/swagger-ui.html")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         try {
             Authentication authentication = authenticationService.doAuthentication(request);

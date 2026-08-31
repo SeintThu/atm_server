@@ -1,0 +1,1 @@
+alter table users add column address VARCHAR(500);
